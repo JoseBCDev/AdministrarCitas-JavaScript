@@ -25,17 +25,6 @@ function eventListener() {
     formulario.addEventListener('submit',nuevaCita);
 }
 
-//Objeto Cita
-
-const ObjCita = {
-    mascota: '',
-    propietario: '',
-    telefono: '',
-    fecha: '',
-    hora: '',
-    sintomas: ''
-}
-
 //Clases
 class UI {
 
@@ -67,12 +56,29 @@ class Citas {
     {
         this.citas = [];
     }
+
+    agregarCitas(cita)
+    {
+        this.citas = [...this.citas,cita];
+        console.log(this.citas);
+    }
 }
 
 //Instanciamos
 
 const ui = new UI();
 const administrarCitas = new Citas();
+
+//Objeto Cita
+
+const ObjCita = {
+    mascota: '',
+    propietario: '',
+    telefono: '',
+    fecha: '',
+    hora: '',
+    sintomas: ''
+}
 
 //Funciones
 
@@ -91,6 +97,27 @@ function nuevaCita(e) {
 
         return;
     }
+    //Agregando ID al objeto
+    ObjCita.id = Date.now();
+
+    //Enviando datos al arreglo
+    administrarCitas.agregarCitas({...ObjCita});
+
+    //Reiniciar Objeto
+    reiniciarObjeto();
+
+    //Reiniciar Formulario
+    formulario.reset();
+}
+
+function reiniciarObjeto()
+{
+    ObjCita.mascota = '';
+    ObjCita.propietario = '';
+    ObjCita.telefono = '';
+    ObjCita.fecha = '';
+    ObjCita.hora = '';
+    ObjCita.sintomas = '';
 }
 
 
