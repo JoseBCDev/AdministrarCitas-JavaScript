@@ -138,6 +138,12 @@ class Citas {
     {
         this.citas = this.citas.filter((cita)=>cita.id !== id);
     }
+
+    editarCitas(citaActualizada)
+    {
+        
+        this.citas = this.citas.map((cita)=>cita.id === citaActualizada.id ? citaActualizada : cita);
+    }
 }
 
 //Instanciamos
@@ -183,6 +189,8 @@ function nuevaCita(e) {
         //Volvemos al nombre del inicio
         formulario.querySelector('button[type="submit"]').textContent = 'CREAR CITA';
 
+        //Metodo EditarCita
+        administrarCitas.editarCitas({...ObjCita});
         //Quitamos el modo Edicion
         editando = false;
     }else{
@@ -247,6 +255,7 @@ function cargarEdicion(cita) {
     ObjCita.fecha = fecha;
     ObjCita.hora = hora;
     ObjCita.sintomas = sintomas;
+    ObjCita.id = id;
 
 
     formulario.querySelector('button[type="submit"]').textContent = 'GUARDAR CAMBIOS';
